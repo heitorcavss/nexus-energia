@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Energia - Economia Garantida</title>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- RESET & BASE --- */
+        :root {
+            --color-primary: #10B981;
+            /* Green 500 */
+            --color-primary-dark: #059669;
+            /* Green 600 */
+            --color-secondary: #374151;
+            /* Gray 700 */
+            --color-accent: #F3F4F6;
+            /* Gray 100 */
+            --color-text-main: #1F2937;
+            /* Gray 800 */
+            --color-text-light: #6B7280;
+            /* Gray 500 */
+            --color-white: #FFFFFF;
+            --color-bg-hero: #F4F7F9;
+            /* Premium Blue-Gray Hero BG */
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-xl: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-text-main);
+            background-color: var(--color-white);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- HEADER --- */
+        .site-header {
+            background-color: var(--color-white);
+            padding: 1.25rem 0;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            letter-spacing: -0.025em;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #00C853 0%, #00A846 100%);
+            /* Green Vibrante */
+            color: var(--color-white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 200, 83, 0.25);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 10px rgba(0, 200, 83, 0.35);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background-color: var(--color-bg-hero);
+            padding: 4rem 0;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            /* ~40px */
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--color-text-main);
+        }
+
+        .hero-text h2 {
+            font-size: 1.125rem;
+            /* ~18px */
+            font-weight: 400;
+            color: var(--color-text-light);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .trust-badges {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--color-primary-dark);
+            background-color: #D1FAE5;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+        }
+
+        /* --- CHAT CARD (SIMULATOR) --- */
+        .chat-card {
+            background: #FFFFFF;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 550px;
+            border: 2px solid var(--color-primary);
+            position: relative;
+            animation: chatGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes chatGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(16, 185, 129, 0.15);
+            }
+
+            50% {
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2), 0 0 20px rgba(16, 185, 129, 0.25);
+            }
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #047857 0%, var(--color-primary-dark) 100%);
+            color: var(--color-white);
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .chat-header h3 {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .chat-header p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-color: #F3F4F6;
+        }
+
+        /* Message Bubbles */
+        .message {
+            max-width: 85%;
+            padding: 0.75rem 1rem;
+            border-radius: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bot-message {
+            align-self: flex-start;
+            background-color: var(--color-white);
+            color: var(--color-text-main);
+            border-bottom-left-radius: 0.25rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-bottom-right-radius: 0.25rem;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Chat Input Area */
+        .chat-input-area {
+            padding: 1rem;
+            background-color: var(--color-white);
+            border-top: 1px solid #E5E7EB;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 9999px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-size: 1rem;
+        }
+
+        .chat-input-area input:focus {
+            border-color: var(--color-primary);
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #00C853 0%, #00A846 100%);
+            /* Green Vibrante */
+            color: var(--color-white);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 200, 83, 0.3);
+        }
+
+        .send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 200, 83, 0.4);
+        }
+
+        /* --- HOW IT WORKS --- */
+        .how-it-works {
+            padding: 5rem 0;
+            background-color: var(--color-white);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--color-text-main);
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .step-card {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--color-primary);
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-text-main);
+        }
+
+        .step-desc {
+            color: var(--color-text-light);
+            font-size: 0.9rem;
+        }
+
+        /* --- OBJECTIONS --- */
+        .objections {
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+            padding: 5rem 0;
+        }
+
+        .section-title-dark {
+            color: #FFFFFF !important;
+            /* Force White for Dark Section */
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .objection-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            /* Increased Gap */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .objection-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        .objection-item span {
+            color: #FFFFFF;
+        }
+
+        .icon-check {
+            color: #34D399;
+            font-size: 1.25rem;
+        }
+
+        .icon-cross {
+            color: #F87171;
+            font-size: 1.25rem;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer {
+            background-color: #111827;
+            color: #9CA3AF;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .trust-badges {
+                justify-content: center;
+            }
+
+            .chat-card {
+                height: 500px;
+            }
+
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-content">
+            <div class="logo">Nexus Energia</div>
+            <a href="#" class="cta-button" onclick="alert('Link para WhatsApp Simulado!')">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2z" />
+                </svg>
+                Falar no WhatsApp
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <!-- Left Column: Copy -->
+            <div class="hero-text">
+                <h1>Pague até 25% menos na sua conta de luz, sem instalar nada e sem mudar de rotina.</h1>
+                <h2>Energia limpa, 100% legalizada pela ANEEL. Você continua com a mesma distribuidora.</h2>
+
+                <div class="trust-badges">
+                    <span class="badge">✅ Regulado pela ANEEL</span>
+                    <span class="badge">🌱 Energia 100% Limpa</span>
+                </div>
+            </div>
+
+            <!-- Right Column: Chat Simulator -->
+            <div class="chat-card">
+                <div class="chat-header">
+                    <h3>Simule sua economia agora 👇</h3>
+                    <p>Atendente Virtual Online</p>
+                </div>
+
+                <div id="chat-box" class="chat-messages">
+                    <!-- Initial Bot Message -->
+                    <div class="message bot-message">
+                        Olá! Sou o assistente virtual da Nexus Energia. Como posso ajudar com sua conta de luz ou
+                        economia de energia hoje?
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Digite sua mensagem..." autocomplete="off">
+                    <button id="send-btn" class="send-btn">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">Economia garantida em 3 passos simples</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <i class="step-icon fa-solid fa-file-signature"></i>
+                    <h3 class="step-title">1. Você assina o plano digital</h3>
+                    <p class="step-desc">Tudo 100% online, sem burocracia e em poucos minutos.</p>
+                </div>
+                <div class="step-card">
+                    <i class="step-icon fa-solid fa-solar-panel"></i>
+                    <h3 class="step-title">2. A energia vem da nossa usina solar</h3>
+                    <p class="step-desc">Produzimos energia limpa e injetamos na rede da sua distribuidora.</p>
+                </div>
+                <div class="step-card">
+                    <i class="step-icon fa-solid fa-wallet"></i>
+                    <h3 class="step-title">3. O desconto cai direto na sua fatura</h3>
+                    <p class="step-desc">Você recebe sua conta de luz normal, mas com o desconto da Nexus Energia já
+                        aplicado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objections Section -->
+    <section class="objections">
+        <div class="container">
+            <h2 class="section-title section-title-dark">Por que a Nexus Energia é para
+                você?</h2>
+            <div class="objection-list">
+                <div class="objection-item">
+                    <span class="icon-cross">❌</span>
+                    <span>Não precisa instalar placas solares</span>
+                </div>
+                <div class="objection-item">
+                    <span class="icon-cross">❌</span>
+                    <span>Não tem fidelidade ou multa</span>
+                </div>
+                <div class="objection-item">
+                    <span class="icon-cross">❌</span>
+                    <span>Não muda seu relógio nem a fiação</span>
+                </div>
+                <div class="objection-item">
+                    <span class="icon-check">✅</span>
+                    <span>Economia garantida todo mês</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>Nexus Energia © 2026 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatBox = document.getElementById('chat-box');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+
+            // Function to add message to chat
+            function appendMessage(text, sender) {
+                const messageDiv = document.createElement('div');
+                messageDiv.classList.add('message', sender === 'user' ? 'user-message' : 'bot-message');
+                messageDiv.innerText = text; // Safe text insertion
+
+                chatBox.appendChild(messageDiv);
+
+                // Auto-scroll to bottom
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            // Function to handle sending message
+            async function sendMessage() {
+                const text = userInput.value.trim();
+                if (text === "") return;
+
+                // 1. Show user message
+                appendMessage(text, 'user');
+
+                // 2. Clear input
+                userInput.value = '';
+
+                // 3. Send to Backend
+                try {
+                    // Start loading state (optional visual cue could be added here)
+                    const response = await fetch('/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ message: text })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        appendMessage(data.response, 'bot');
+                    } else {
+                        appendMessage("Erro: " + (data.response || "Falha na comunicação com o servidor."), 'bot');
+                    }
+
+                } catch (error) {
+                    console.error('Erro:', error);
+                    appendMessage("Desculpe, não consegui conectar ao servidor.", 'bot');
+                }
+            }
+
+            // Event Listeners
+            sendBtn.addEventListener('click', sendMessage);
+
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            console.log("Sistema Frontend conectado ao Backend (/chat).");
+        });
+    </script>
+</body>
+
+</html>
