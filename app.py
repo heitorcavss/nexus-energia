@@ -27,8 +27,8 @@ chat_history = []
 # ==============================================================================
 def configure_model():
     """
-    Tenta conectar no 'gemini-2.5-flash'. 
-    Se falhar, tenta o 'gemini-2.5-flash-lite' como fallback.
+    Tenta conectar no 'gemini-2.5-flash-lite-preview' (cota disponível).
+    Se falhar, tenta 'gemini-2.5-flash-lite' como fallback.
     """
     if not api_key:
         print("❌ ERRO FATAL: Sem API KEY no arquivo .env")
@@ -37,14 +37,13 @@ def configure_model():
     genai.configure(api_key=api_key)
     
     try:
-        print("\n🔄 Tentando conectar no modelo principal: gemini-2.5-flash ...")
-        model = genai.GenerativeModel('gemini-2.5-flash')
-        # Teste de vida
+        print("\n🔄 Tentando conectar no modelo principal: gemini-2.5-flash-lite-preview ...")
+        model = genai.GenerativeModel('gemini-2.5-flash-lite-preview')
         model.generate_content("teste")
-        print("✅ SUCESSO! Usando gemini-2.5-flash")
+        print("✅ SUCESSO! Usando gemini-2.5-flash-lite-preview")
         return model
     except Exception as e:
-        print(f"⚠️ Falha no Flash: {e}")
+        print(f"⚠️ Falha no preview: {e}")
         print("🔄 Tentando fallback para: gemini-2.5-flash-lite ...")
         
         try:
